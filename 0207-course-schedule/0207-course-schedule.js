@@ -46,42 +46,37 @@
 //     cycleFound = true;
 //   }
 // }
-let adj = [];
-let state = {};
-let cycleFound = false;
-function canFinish(numCourses, prerequisites){
-    adj = [];
-    state = {};
-    cycleFound = false; 
 
-    for(let i=0; i<numCourses; i++){
-        adj.push([]);
-        state[i]='u';
-    }
-    for(let i=0; i<prerequisites.length; i++){
-        let[ toNode , fromNode] = prerequisites[i]
+function canFinish(numCourses, prerequisites){
+    
+    let cycleFound = {value:false}; 
+
+    let adj = Array.from({length:numCourses} , ()=> []);
+    let state = Array(numCourses).fill('u')
+    
+    for(let [ toNode , fromNode] of prerequisites ){
         adj[fromNode].push(toNode)
     }
     for(let i=0; i<numCourses; i++){
         if(state[i]==='u'){
-            dfs(i)
+            dfs(i, adj , state ,  cycleFound )
         }
-        if(cycleFound === true){
+        if(cycleFound.value === true){
             return false;
         }
     }
-    return !cycleFound;
+    return !cycleFound.value;
 }
-function dfs(x){
+function dfs(x ,  adj , state ,  cycleFound){
 if(state[x]==='u'){
     state[x]='v';
 
     for(let i=0; i<adj[x].length; i++){
         let nei = adj[x][i];
         if(state[nei]==='u'){
-            dfs(nei)
+            dfs(nei ,  adj , state ,  cycleFound )
         }else if(state[nei]==='v'){
-            cycleFound=true;
+            cycleFound.value = true;
         }
     }
     state[x]='p'
