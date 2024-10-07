@@ -4,7 +4,7 @@
  */
 var minCostClimbingStairs = function(cost) {
     if(cost === 0) return 0;
-    let memo = new Array(cost.length + 1);
+    let memo = new Array(cost.length );
     
     memo[0] = 0;
     memo[1] = 0;
