@@ -11,22 +11,6 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    
-    
-    function reverse(head){
-        let curr = head;
-        let  prev = null;
-        
-        while(curr){
-            let next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-            
-        }
-        return prev;
-    }
-    
 l1 = reverse(l1);
 l2 = reverse(l2);
     
@@ -59,3 +43,17 @@ l2 = reverse(l2);
     
     return reverse(result.next)  ;
 };
+
+function reverse(head){
+        let curr = head;
+        let  prev = null;
+        
+        while(curr){
+            let next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            
+        }
+        return prev;
+    }
