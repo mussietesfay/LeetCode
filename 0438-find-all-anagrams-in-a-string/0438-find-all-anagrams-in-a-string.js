@@ -26,9 +26,9 @@ var findAnagrams = function(s, p) {
     // Slide the window over s
     for (let i = pLength; i < sLength; i++) {
         // Add the new character to the window
-        sCount[s.charCodeAt(i) - 'a'.charCodeAt(0)]++;  
+        sCount[s[i].charCodeAt(0) - 'a'.charCodeAt(0)]++;  
         // Remove the character going out of the window
-        sCount[s.charCodeAt(i - pLength) - 'a'.charCodeAt(0)]--;
+        sCount[s[i - pLength].charCodeAt(0) - 'a'.charCodeAt(0)]--;
         
         // Check if the current window matches pCount
         if (theSame(sCount, pCount)) {
