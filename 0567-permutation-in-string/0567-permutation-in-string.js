@@ -14,8 +14,8 @@ var checkInclusion = function(s1, s2) {
     let s2Count = new Array(26).fill(0);
     
     for(let i = 0; i< s1Length; i++ ){
-      s1Count[s1[i].charCodeAt(0) - 'a'.charCodeAt(0)]++;
-      s2Count[s2[i].charCodeAt(0) - 'a'.charCodeAt(0)]++;  
+      s1Count[s1.charCodeAt(i) - 'a'.charCodeAt(0)]++;
+      s2Count[s2.charCodeAt(i) - 'a'.charCodeAt(0)]++;  
     }
     if(theSame(s1Count ,s2Count )) return true;
     
