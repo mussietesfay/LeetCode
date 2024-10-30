@@ -12,17 +12,24 @@
  * @return {number}
  */
 var kthSmallest = function(root, k) {
-    let result = [];
+    let result = null;
+    let count = 0;
      
     function InOrder (currentNode){
     
       if(currentNode.left) InOrder(currentNode.left) 
-        result.push(currentNode.val)
+        count++
+        
+        if(count === k){
+            result = currentNode.val;
+            return;
+        }
+        
      if(currentNode.right) InOrder(currentNode.right) 
     
 }
     InOrder(root);
     
-    return result[k-1];
+    return result;
 };
 
