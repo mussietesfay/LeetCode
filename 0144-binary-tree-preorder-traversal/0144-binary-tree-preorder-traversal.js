@@ -12,18 +12,13 @@
  */
 var preorderTraversal = function(root) {
     let result = [];
-    let stack = [];
     
-    if (root) stack.push(root);
-    
-    while (stack.length) {
-        let node = stack.pop(); // Get the top node from the stack
-        result.push(node.val);  // Visit the node
-        
-        // Push right child first so that left child is processed next
-        if (node.right) stack.push(node.right);
-        if (node.left) stack.push(node.left);
+    function preorder(node){
+        if(!node) return;
+        result.push(node.val)
+        if(node.left) preorder(node.left);
+        if(node.right) preorder (node.right)
     }
-    
+    preorder(root);
     return result;
 };
