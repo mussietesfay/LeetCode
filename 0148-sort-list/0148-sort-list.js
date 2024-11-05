@@ -10,60 +10,63 @@
  * @return {ListNode}
  */
 
+function sortList(head) {
+    if (!head || !head.next) return head;
 
-    const getMiddle = (head) => {
+    
+    let middle = mid(head);
+
+   
+    let left = sortList(head);
+    let right = sortList(middle);
+
+   
+    return mergeSorted(left, right);
+}
+
+function mid(head) {
     let slow = head;
     let fast = head.next;
 
-    while(fast && fast.next) {
+    
+    while (fast && fast.next) {
         slow = slow.next;
         fast = fast.next.next;
     }
 
-  return slow;
+    
+    let temp = slow.next; 
+    slow.next = null;     
+    return temp;          
 }
 
-const merge = (left, right) => {
-    let dummy = new ListNode(0);
-    let tail = dummy;
+function mergeSorted(list1, list2) {
+    if (!list1) return list2;
+    if (!list2) return list1;
 
-    while(left && right) {
-        if(left.val < right.val) {
-            tail.next = left;
-            left = left.next;
-        }else {
-            tail.next = right;
-            right = right.next;
+    let dummy = new ListNode(0); 
+    let prev = dummy; 
+
+    // Merge the two lists
+    while (list1 && list2) {
+        if (list1.val < list2.val) {
+            prev.next = list1;
+            list1 = list1.next;
+        } else {
+            prev.next = list2;
+            list2 = list2.next;
         }
-
-        tail = tail.next;
+        prev = prev.next; 
     }
 
-    if(left) {
-        tail.next = left;
+    
+    if (list1) {
+        prev.next = list1;
+    }
+    if (list2) {
+        prev.next = list2;
     }
 
-    if(right) {
-        tail.next = right;
-    }
-
-    return dummy.next;
+    return dummy.next; 
 }
-
-var sortList = function(head) {
-    if(!head || !head.next) {
-        return head;
-    }
-
-    // Split in half
-    let left = head;
-    let right = getMiddle(head);
-    let temp = right.next;
-    right.next = null;
-    right = temp;
-
-    left = sortList(left);
-    right = sortList(right);
-
-    return merge(left, right);
-};
+    
